@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BD TASK POINT</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ padding:18px;
+ padding-bottom:90px;
+ background:#101827;
+ color:white;
+ font-family:Arial,sans-serif;
+}
+.header{
+ font-size:24px;
+ font-weight:bold;
+ margin:15px 0;
+}
+.sub{color:#aab7ca;font-size:14px}
+.balance{
+ background:linear-gradient(135deg,#1769e0,#693bd1);
+ padding:23px;
+ border-radius:18px;
+ margin-top:20px;
+}
+.balance h1{font-size:30px;margin:10px 0}
+.section{
+ font-size:19px;
+ font-weight:bold;
+ margin:25px 0 12px;
+}
+.task{
+ background:#202d40;
+ padding:16px;
+ border-radius:14px;
+ margin:12px 0;
+}
+.task button{
+ background:#2879ef;
+ color:white;
+ border:0;
+ border-radius:9px;
+ padding:11px 17px;
+ margin-top:12px;
+ font-weight:bold;
+}
+.nav{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ background:#1b2638;
+ padding:16px;
+ display:flex;
+ justify-content:space-around;
+}
+.nav button{
+ background:none;
+ color:white;
+ border:0;
+ font-size:13px;
+}
+</style>
+</head>
+
+<body>
+<main>
+<div class="header">🚀 BD TASK POINT</div>
+
+<div class="sub" id="username">
+Welcome to our Task App!
+</div>
+
+<div class="balance">
+<div>💰 TOTAL POINTS</div>
+<h1>0 Points</h1>
+<div>Complete tasks to collect points</div>
+</div>
+
+<div class="section">📋 Available Tasks</div>
+
+<div class="task">
+<b>Task 01 - Join Telegram Channel</b>
+<p class="sub">Reward: 10 Points</p>
+<button onclick="submitTask('task01')">
+Submit Task
+</button>
+</div>
+
+<div class="task">
+<b>Task 02 - Follow Social Page</b>
+<p class="sub">Reward: 15 Points</p>
+<button onclick="submitTask('task02')">
+Submit Task
+</button>
+</div>
+
+<div class="task">
+<b>Task 03 - Daily Check-in</b>
+<p class="sub">Reward: 5 Points</p>
+<button onclick="submitTask('task03')">
+Submit Task
+</button>
+</div>
+
+<div class="section">🏆 Your Progress</div>
+
+<div class="task">
+<p>Completed Tasks: 0</p>
+<p>Pending Review: 0</p>
+<p>Approved Tasks: 0</p>
+</div>
+</main>
+
+<div class="nav">
+<button onclick="showMessage('Home')">🏠 Home</button>
+<button onclick="showMessage('Tasks')">📋 Tasks</button>
+<button onclick="showMessage('Referral')">👥 Refer</button>
+<button onclick="showMessage('Profile')">👤 Profile</button>
+</div>
+
+<script>
+const tg = window.Telegram.WebApp;
+tg.ready();
+tg.expand();
+
+const user = tg.initDataUnsafe?.user;
+
+if(user){
+ document.getElementById("username").innerText =
+ "Welcome, " + user.first_name + "!";
+}
+
+function submitTask(id){
+ if(!tg.initData){
+  alert("Please open this app from Telegram.");
+  return;
+ }
+
+ tg.sendData(JSON.stringify({
+  action:"task_submit",
+  task_id:id
+ }));
+}
+
+function showMessage(page){
+ alert(page + " section will be connected soon.");
+}
+</script>
+
+</body>
+  </html>
+  
